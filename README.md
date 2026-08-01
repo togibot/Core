@@ -2,109 +2,128 @@
 
 ![Logo](https://files.catbox.moe/75q4r7.jpg)
 
-Starseed is a simple WhatsApp bot designed for quick setup and efficient use. It offers essential features such as sticker creation, social media content downloading, basic group management tools, and various general-purpose utilities, all accessible directly through WhatsApp.
+Starseed adalah bot WhatsApp sederhana yang dikembangkan dengan mengutamakan kemudahan instalasi, kecepatan, dan efisiensi penggunaan. Beragam fitur penting tersedia secara langsung, mulai dari pembuatan stiker, pengunduhan konten media sosial, pengelolaan grup dasar, hingga berbagai utilitas serbaguna yang siap membantu aktivitas sehari-hari melalui WhatsApp.
 
 > [!CAUTION]
-This project is a direct implementation of [`@itsliaaa/baileys`](https://github.com/itsliaaa/baileys#readme). If you choose to replace it with any other fork, all resulting issues or bugs are entirely your responsibility.
+> Project ini adalah implementasi langsung dari [`@itsliaaa/starcore`](https://github.com/itsliaaa/starcore#readme).
 
-### ⚙️ Architecture Overview
+### ⚙️ Gambaran Struktur
 
-| Principle | Implementation |
+| Prinsip | Implementasi |
 |------------|----------------|
-| ⚡ Native ESM Architecture | Fully structured using modern ECMAScript Modules (`type: module`) and designed for Node.js >=20.18.1 environments. |
-| 🪶 Lean Dependency Strategy | Minimal, purpose-specific dependencies to keep the runtime lightweight. |
-| 🧩 Runtime Minimalism | No obfuscation or bundling layers are used, ensuring predictable execution and optimal performance. |
+| ⚡ Arsitektur Native ESM | Seluruh kode disusun menggunakan ECMAScript Modules (ESM) (`type: module`) dan dirancang untuk berjalan pada lingkungan Node.js **>= 20.18.1**. |
+| 🪶 Strategi Dependensi Ringan | Menggunakan dependensi seminimal mungkin dan hanya untuk kebutuhan yang benar-benar diperlukan, sehingga aplikasi tetap ringan dan mudah dipelihara. |
+| 🧩 Minimalisme Runtime | Starseed tidak menggunakan proses obfuscation maupun bundling pada kode sumber, sehingga alur eksekusi tetap mudah dipahami, konsisten, dan efisien. |
 
-### 📄 System Requirements
+### 📄 Persyaratan Sistem
 
-| 🔹 Minimum | ✨ Recommended |
-|------------|------------|
+| 🔹 Minimal | ✨ Rekomendasi |
+|------------|----------------|
 | 1 vCPU | 1 vCPU |
 | 512 MB RAM | 1 GB RAM |
-| 1 GB Free Space | 2 GB Free Space |
+| Penyimpanan 1 GB | Penyimpanan 2 GB |
 | FFmpeg v6.x.x | FFmpeg v6.x.x |
 | Node.js v20.18.1 LTS | Node.js v24.x.x LTS |
 | Yarn v1.x.x | Yarn v1.22.22 |
 
-### 🗄️ Server
+### 🗄️ Hosting
 
-To run the bot, I highly recommend the following services. They are not only affordable, but also ensure that user data stored in the database remains secure:
+Untuk menjalankan bot, sangat direkomendasikan layanan berikut. Layanan ini tidak hanya terjangkau, tetapi juga memastikan bahwa data pengguna yang tersimpan di database termasuk script bot tetap aman:
 
-- [x] NAT VPS [Hostdata](https://hostdata.id/nat-vps-usa/) (Highly Recommended)
+- [x] NAT VPS [Hostdata](https://hostdata.id/nat-vps-usa/) **(Sangat direkomendasikan)**
 - [x] Hosting Panel [The Hoster](https://thehoster.net/bot-hosting/)
 - [x] VPS [OVH Hosting](https://www.ovhcloud.com/asia/vps/)
 
-### ⬇️ How to Download
+### ⬇️ Cara Download
 
 ![DownloadStep](https://files.catbox.moe/4dz3ip.jpg)
 
-1. Click the **Code** button.
-2. Select **Download ZIP**.
-3. Extract the downloaded file.
+1. Klik tombol **"Code"** berwarna **hijau**.
+2. Pilih **"Download ZIP"**.
+3. Ekstrak file yang didownload.
 
-### 📥 Installation & Run
+### 📥 Instalasi & Menjalankan Bot
 
 > [!IMPORTANT]
-Check this repository regularly for updates. The project is still under development. If you encounter any issues, please open an issue. Thank you!
+> Periksa repositori ini secara berkala untuk mendapatkan pembaruan terbaru. Proyek ini masih dalam tahap pengembangan. Jika kamu menemukan masalah atau bug, silakan buat Issue. Terima kasih.
 
 > [!NOTE]
-The installer supports Linux, macOS (Darwin), and Android (Termux).
+> Installer mendukung sistem operasi berikut:
 >
-> I’m not familiar with Windows because I primarily use Linux, so no Windows installation files are provided.
+> - 🐧 Linux
+> - 🍎 macOS (Darwin)
+> - 📱 Android (Termux)
+> - 🪟 Windows (PowerShell)
 
-Make sure your system meets the required dependencies. Then run:
+Pastikan sistem kamu telah memenuhi seluruh persyaratan yang diperlukan. Setelah itu, jalankan perintah berikut.
+
+#### 🐧 Linux / 🍎 macOS / 📱 Termux
 
 ```bash
 bash install.sh
 ```
 
-After installation completes, start the bot using pm2:
+#### 🪟 Windows
+
+Jalankan PowerShell sebagai Administrator, kemudian jalankan perintah berikut.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File install.ps1
+```
+
+#### 🚀 Menjalankan Bot dengan PM2
+
+Setelah proses instalasi selesai, jalankan bot menggunakan PM2.
 
 ```bash
 pm2 start app.config.cjs && pm2 logs bot
 ```
 
-### 🔧 Configuration
+### 🔧 Konfigurasi
 
-Edit [config.json](https://github.com/itsliaaa/starseed/blob/main/config.js) to customize the bot:
+Edit [config.js](https://github.com/itsliaaa/starseed/blob/main/config.js) untuk mengkustomisasi bot:
 
 ```javascript
-Object.assign(global, {
-   // Owner name
+Object.assign(globalThis.botConfig ??= {}, {
    ownerName: 'Lia Wynn',
+   ownerNumber: '628111',
 
-   // Owner phone number
-   ownerNumber: '6281111',
-
-   // Bot name
    botName: 'Starseed',
-
-   // Footer text
-   footer: '✦ Starseed',
-
-   // [IMPORTANT] Bot phone number for pairing code
-   botNumber: '6281111',
-
-   // Pairing using code method (set to true for pairing code, false for QR pairing)
+   botFooter: '✦ Starseed',
+   botNumber: '628111',
    pairingCode: false,
+   customCode: 'starseed',
 
-   // User default limit (used for reset too)
-   defaultLimit: 15,
+   packName: '📦 Starseed Sticker',
+   packPublisher: 'GitHub: itsliaaa',
 
-   // Sticker pack name
-   stickerPackName: '📦 Starseed Sticker',
+   autoTyping: true,
 
-   // Sticker pack publisher
-   stickerPackPublisher: 'GitHub: itsliaaa',
+   defaultLimit: 30,
 
-   // ********** API KEYS ********** //
+   botThumbnail: './media/image/thumbnail.jpg',
+   botMenuMusic: './media/audio/menu-music.mp3',
 
-   // Google AI Studio for Chat Bot @ https://aistudio.google.com/
-   googleApiKey: '',
+   pluginsFolder: './plugins',
 
-   // SightEngine for Anti Porn @ https://sightengine.com/
-   apiUser: '',
-   apiSecret: '',
+   localTimezone: 'Asia/Jakarta',
+
+   temporaryFileInterval: 30 * 60 * 1000,
+   dataInterval: 10 * 60 * 1000,
+   gcInterval: 1 * 60 * 60 * 1000,
+
+   rssLimit: 384 * 1024 * 1024,
+
+   maxNsfwScore: 0.75,
+
+   apiKey: {
+      // Google AI Studio untuk Chat Bot @ https://aistudio.google.com/
+      GOOGLE_APIKEY: '',
+
+      // SightEngine untuk Anti Porn @ https://sightengine.com/
+      API_USER: '',
+      API_SECRET: ''
+   },
 
    // ...
 })
@@ -112,57 +131,68 @@ Object.assign(global, {
 
 ### 📁 Plugins
 
-You can follow this format to add your own plugins:
+Kamu dapat mengikuti format berikut untuk membuat plugin kamu sendiri:
 
 ```javascript
 export default {
-   command: 'your_command',
-   hidden: 'your_hidden_command',
-   category: 'your_category_name',
+   command: 'perintah_kamu',
+   hidden: 'perintah_tersembunyi_kamu',
+   category: 'kategori_kamu',
    async run(m, {
-      sock,
-      // ...other values from handler.js
+      client,
+      // ...atribut lain dari listener.js
    }) {
-      /* YOUR LOGIC HERE */
+      /* LOGIKA KAMU DISINI */
    },
-   group: false, // is this command only for group chats?
-   private: false, // is this command only for private chats?
-   owner: false, // is this command only for the owner?
-   partner: false, // is this command only for partners?
-   admin: false, // is this command only for group admins?
-   botAdmin: false, // does this command require the bot to be a group admin?
-   limit: 1 // command usage cost
+   group: false, // apakah perintah hanya untuk grup?
+   private: false, // apakah perintah hanya untuk chat pribadi?
+   owner: false, // apakah perintah hanya untuk owner?
+   partner: false, // apakah perintah hanya untuk partner?
+   admin: false, // apakah perintah hanya untuk admin grup?
+   botAdmin: false, // apakah perintah mengharuskan bot menjadi admin?
+   limit: 1, // biaya limit untuk perintah
+   energy: 30 // biaya untuk perintah unik
 }
 ```
 
-See the documentation in [`@itsliaaa/baileys`](https://github.com/itsliaaa/baileys#-sending-interactive-messages) for details about sending interactive messages.
+Lihat dokumentasi di [`@itsliaaa/starcore`](https://github.com/itsliaaa/starcore) untuk detail cara mengirim pesan interaktif dan unik.
 
 ### 👤 Credits
 
-Starseed is an independent project built and maintained by:
+Starseed merupakan project independen yang dibuat dan dikelola oleh:
 
-- [itsliaaa](https://github.com/itsliaaa) — Project Maintainer & Creator
+- [itsliaaa](https://github.com/itsliaaa) — Pembuat & Maintainer Project
 
-Support this project:
+Dukung pengembangan project ini:
 
 - [Saweria](https://saweria.co/itsliaaa)
 
-#### 🌐 Third-Party Services
+#### 🌐 Layanan Pihak Ketiga
 
-Starseed utilizes the following external APIs:
+Starseed memanfaatkan beberapa layanan eksternal berikut:
 
-- [rynn-k](https://github.com/rynn-k) — Nekolabs API
 - [elrayyxml](https://github.com/elrayyxml) — Nexray API
-- [faa](https://whatsapp.com/channel/0029Vb7APG9InlqWTBGDnN3d) — Faa API 
+- [faa](https://whatsapp.com/channel/0029Vb7APG9InlqWTBGDnN3d) — Faa API
 - [Deline Clarissa](https://whatsapp.com/channel/0029VbB8WYS4CrfhJCelw33j) — Deline API
-- [ZenzzXD](https://github.com/ZenzzXD) — Zennz API
+- [vandebry10-star](https://github.com/vandebry10-star) — Azbry API
 
-These services are used as external integrations and are not directly affiliated with the development of Starseed.
+Layanan-layanan tersebut digunakan sebagai integrasi eksternal dan tidak berafiliasi secara langsung dengan pengembangan Starseed.
 
-#### 🧪 Testers & Community
+#### 📦 Komponen Perangkat Lunak Pihak Ketiga
 
-Special thanks to:
-- Starseed Group Members  
-- And of course… **You** ✨
+Starseed menyertakan berkas `lib/scripts/speedtest.py` yang merupakan salinan tanpa modifikasi dari project [`speedtest-cli`](https://github.com/sivel/speedtest-cli).
 
-Your feedback and support help this project continue to grow 🌱
+- Repositori: https://github.com/sivel/speedtest-cli
+- Penulis: Matt Martz beserta para kontributor
+- Lisensi: Apache License 2.0
+
+Berkas tersebut disertakan untuk memudahkan proses instalasi sehingga Starseed dapat langsung digunakan tanpa memerlukan pengunduhan komponen tambahan. Seluruh hak cipta atas `speedtest.py` tetap dimiliki oleh penulis aslinya dan penggunaannya mengikuti ketentuan Apache License 2.0 sebagaimana tercantum pada berkas sumber.
+
+#### 🧪 Penguji & Komunitas
+
+Ucapan terima kasih yang sebesar-besarnya kepada:
+
+- Seluruh anggota Grup Starseed
+- Dan tentu saja... **Kamu** ✨
+
+Setiap masukan, laporan, ide, serta dukungan yang diberikan menjadi bagian penting dalam perkembangan dan penyempurnaan Starseed. 🌱
