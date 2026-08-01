@@ -1,11 +1,11 @@
 {
    "name": "@itsliaaa/starseed",
-   "version": "0.2.0-beta.19",
-   "description": "A simple WhatsApp bot built on Baileys",
+   "version": "0.0.0-preview.0",
+   "description": "Bot WhatsApp simpel dan ringan dibangun menggunakan Baileys",
    "main": "index.js",
    "type": "module",
    "scripts": {
-      "start": "NODE_ENV=production MALLOC_ARENA_MAX=2 node --max-old-space-size=256 --expose-gc index.js"
+      "start": "NODE_ENV=production MALLOC_ARENA_MAX=2 node index.js"
    },
    "engines": {
       "node": ">=20.18.1"
@@ -14,13 +14,14 @@
       "type": "git",
       "url": "git+https://github.com/itsliaaa/starseed.git"
    },
+   "funding": {
+      "type": "donate",
+      "url": "https://saweria.co/itsliaaa"
+   },
    "keywords": [
       "automation",
-      "base",
       "baileys",
       "bot",
-      "js-whatsapp",
-      "multi-device",
       "whatsapp",
       "whatsapp-bot"
    ],
@@ -28,11 +29,12 @@
    "author": "Lia Wynn",
    "license": "Apache-2.0",
    "dependencies": {
-      "@itsliaaa/baileys": "latest",
-      "@napi-rs/image": "^1.12.0",
-      "file-type": "21.3.4",
-      "qrcode": "~1.5.4",
-      "yt-search": "^2.13.1"
+      "@itsliaaa/starcore": "github:itsliaaa/starcore",
+      "baileys": "^7.0.0-rc14",
+      "sharp": "^0.35.3"
+   },
+   "optionalDependencies": {
+      "@img/sharp-wasm32": "^0.35.3"
    },
    "packageManager": "yarn@1.22.22"
 }
