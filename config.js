@@ -4,105 +4,105 @@ import { cpus } from 'os'
 const CPU_COUNT = cpus().length
 
 Object.assign(globalThis, {
-   // Owner name
-   ownerName: 'Lia Wynn',
+   // Nome do dono
+   ownerName: 'LZ',
 
-   // Owner phone number
-   ownerNumber: '6281111',
+   // Número do dono
+   ownerNumber: '5516991994983',
 
-   // Bot name
-   botName: 'Starseed',
+   // Nome do bot
+   botName: '•𝚃𝚘𝚐𝚒 𝚋𝚘𝚝•',
 
-   // Footer text
-   footer: '✦ Starseed',
+   // Texto do rodapé
+   footer: '✦ •𝚃𝚘𝚐𝚒 𝚋𝚘𝚝•',
 
-   // [IMPORTANT] Bot phone number for pairing code
-   botNumber: '6281111',
+   // [IMPORTANTE] Número do bot para o código de pareamento
+   botNumber: '5516993297555',
 
-   // Pairing using code method (set to true for pairing code, false for QR pairing)
-   pairingCode: false,
+   // Usar pareamento por código (true = código de pareamento, false = QR Code)
+   pairingCode: true,
 
-   // User default limit (used for reset too)
+   // Limite padrão do usuário (também usado para reset)
    defaultLimit: 15,
 
-   // Sticker pack name
-   stickerPackName: '📦 Starseed Sticker',
+   // Nome do pacote de figurinhas
+   stickerPackName: '📦 •𝚃𝚘𝚐𝚒 𝚋𝚘𝚝• Sticker',
 
-   // Sticker pack publisher
-   stickerPackPublisher: 'GitHub: itsliaaa',
+   // Publicador do pacote de figurinhas
+   stickerPackPublisher: 'GitHub: Togi Bot',
 
-   // ********** API KEYS ********** //
+   // ********** CHAVES DE API ********** //
 
-   // Google AI Studio for Chat Bot @ https://aistudio.google.com/
+   // Google AI Studio para Chat Bot
    googleApiKey: '',
 
-   // SightEngine for Anti Porn @ https://sightengine.com/
+   // SightEngine para Anti Porn
    apiUser: '',
    apiSecret: '',
 
-   // ********** ADVANCED SETTINGS ********** //
+   // ********** CONFIGURAÇÕES AVANÇADAS ********** //
 
-   // Local timezone
-   localTimezone: 'Asia/Jakarta',
+   // Fuso horário local
+   localTimezone: 'America/Sao_Paulo',
 
-   // Bot thumbnail (optional, you can change it with setcover command)
+   // Miniatura do bot (opcional, pode ser alterada com o comando setcover)
    botThumbnail: './media/Image/thumbnail.jpg',
 
-   // Bot menu music (optional, you can change it with setmenumusic command)
+   // Música do menu do bot (opcional, pode ser alterada com o comando setmenumusic)
    botMenuMusic: './media/Audio/menu-music.mp3',
 
-   // Temporary folder name (optional)
+   // Nome da pasta temporária (opcional)
    temporaryFolder: 'temp',
 
-   // Plugins folder name (optional)
+   // Nome da pasta de plugins (opcional)
    pluginsFolder: 'plugins',
 
-   // Auth state folder name (optional)
+   // Nome da pasta de autenticação (opcional)
    authFolder: 'session',
 
-   // Store file name (optional)
+   // Nome do arquivo de armazenamento (opcional)
    storeFilename: 'store.json',
 
-   // Database file name (optional)
+   // Nome do arquivo do banco de dados (opcional)
    databaseFilename: 'database.json',
 
-   // Interval to clean temporary files (ms)
+   // Intervalo para limpar arquivos temporários (ms)
    temporaryFileInterval: 30 * 60 * 1_000,
 
-   // Persist database to file interval (ms)
+   // Intervalo para salvar o banco de dados no arquivo (ms)
    dataInterval: 10 * 60 * 1_000,
 
-   // Call the garbage collector if exposed (ms)
+   // Chamar o garbage collector caso esteja disponível (ms)
    gcInterval: 1 * 60 * 60 * 1_000,
 
-   // API request timeout (ms)
+   // Tempo limite das requisições à API (ms)
    requestTimeout: 1.5 * 60 * 1_000,
 
-   // FFmpeg process timeout (ms)
+   // Tempo limite dos processos FFmpeg (ms)
    ffmpegTimeout: 1 * 60 * 1_000,
 
-   // Min delay response (ms)
+   // Atraso mínimo da resposta (ms)
    minDelay: 100,
 
-   // Max delay response (ms)
+   // Atraso máximo da resposta (ms)
    maxDelay: 3 * 1_000,
 
-   // Ignore user old message (sec)
+   // Ignorar mensagens antigas do usuário (segundos)
    ignoreOldMessageTS: 30,
 
-   // RSS limit (mb)
+   // Limite de RSS (MB)
    rssLimit: 384 * 1_024 * 1_024,
 
-   // FFmpeg stream max concurrent processes (min: 1)
+   // Máximo de processos FFmpeg simultâneos (mínimo: 1)
    ffmpegConcurrency: Math.max(4, Math.floor(CPU_COUNT * 1.3)),
 
-   // Maximum allowed NSFW score (lower values are stricter)
+   // Pontuação máxima permitida de NSFW (valores menores são mais rigorosos)
    maxNSFWScore: 0.75,
 
-   // Maximum chat bot history length
+   // Tamanho máximo do histórico do chatbot
    maxHistoryChatSize: 20,
 
-   // Global explore session cache
+   // Cache global das sessões Explore
    ExploreSession: new LRUCache({
       max: 256,
       ttl: 1.5 * 60 * 1_000,
