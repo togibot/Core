@@ -7,17 +7,14 @@ function ensure(group) {
    if (typeof group.togiAntiWords !== 'boolean') group.togiAntiWords = false
    if (typeof group.togiAntiProfanity !== 'boolean') group.togiAntiProfanity = false
    if (typeof group.togiAntiLink !== 'boolean') group.togiAntiLink = false
-   if (!Number.isFinite(group.togiWarnings)) group.togiWarnings = 0
 }
-
-const URL_RE = /https?:\/\/|www\.|chat\.whatsapp\.com\//i
 
 export default {
    command: ['menuadm', 'antipalavrao', 'antipalavra', 'antilink'],
    category: 'togi',
    group: true,
    admin: true,
-   async run(m, { command, text, group, isBotAdmin }) {
+   async run(m, { command, text, group }) {
       ensure(group)
 
       if (command === 'menuadm') {
@@ -29,14 +26,14 @@ export default {
       const mode = normalize(args[0])
 
       if (command === 'antipalavrao') {
-         if (!['on', 'off'].includes(mode)) return m.reply('Use `.antipalavrao on` ou `.antipalavrao off`.')
+         if (!['on', 'off'].includes(mode)) return m.reply('Use .antipalavrao on ou .antipalavrao off.')
          group.togiAntiProfanity = mode === 'on'
          await m.react(group.togiAntiProfanity ? '🟢' : '🔴')
          return m.reply(`🛡️ Antipalavrão: *${group.togiAntiProfanity ? 'ATIVADO' : 'DESATIVADO'}*.`)
       }
 
       if (command === 'antilink') {
-         if (!['on', 'off'].includes(mode)) return m.reply('Use `.antilink on` ou `.antilink off`.')
+         if (!['on', 'off'].includes(mode)) return m.reply('Use .antilink on ou .antilink off.')
          group.togiAntiLink = mode === 'on'
          await m.react(group.togiAntiLink ? '🔗' : '🚫')
          return m.reply(`🔗 Anti-link: *${group.togiAntiLink ? 'ATIVADO' : 'DESATIVADO'}*.`)
@@ -50,7 +47,7 @@ export default {
 
          const value = normalize(args.slice(1).join(' '))
          if ((mode === 'add' || mode === 'del') && !value)
-            return m.reply(`Use `.antipalavra ${mode} <palavra>`.`)
+            return m.reply(`Use .antipalavra ${mode} <palavra>.`)
 
          if (mode === 'add') {
             if (value.length < 2 || value.length > 40) return m.reply('❌ A palavra deve ter entre 2 e 40 caracteres.')
@@ -63,39 +60,7 @@ export default {
             return m.reply(`🧹 Palavra removida da lista do grupo: *${value}*.`)
          }
 
-         return m.reply('Use `.antipalavra on/off`, `.antipalavra add <palavra>` ou `.antipalavra del <palavra>`.')
+         return m.reply('Use .antipalavra on/off, .antipalavra add <palavra> ou .antipalavra del <palavra>.')
       }
-   }
-}
-
-export const moderationEvent = {
-   name: 'togi-moderation',
-   async run(m, { group, isAdmin, isBotAdmin, setting, sock }) {
-      if (!m.isGroup || isAdmin || !isBotAdmin) return
-      ensure(group)
-
-      const body = normalize(m.body)
-      let reason = ''
-
-      if (group.togiAntiLink && URL_RE.test(body))
-         reason = '🔗 Link não permitido neste grupo.'
-
-      if (!reason && group.togiAntiWords && group.togiBlockedWords.some(word => word && body.includes(word)))
-         reason = '🧹 Essa palavra está bloqueada neste grupo.'
-
-      if (!reason && group.togiAntiProfanity) {
-         const forbidden = Array.isArray(setting.forbiddenWords) ? setting.forbiddenWords : []
-         if (forbidden.some(word => word && body.includes(normalize(word))))
-            reason = '🚫 Linguagem inadequada não é permitida neste grupo.'
-      }
-
-      if (!reason) return
-
-      try {
-         await sock.sendMessage(m.chat, { delete: m.key })
-      }
-      catch { }
-
-      await m.reply(`${reason}\n⚠️ Mensagem removida automaticamente.`)
    }
 }
