@@ -3,7 +3,7 @@
 
 export default {
    name: 'togi-afk-guard',
-   async run(m, { user, sock }) {
+   async run(m, { user }) {
       if (!user || !user.afkContext || Object.keys(user.afkContext).length === 0)
          return
 
@@ -22,9 +22,8 @@ export default {
          ? `${minutes} min ${seconds}s`
          : `${seconds}s`
 
-      await sock.sendText(m.chat,
-         `👋 @${m.sender.split('@')[0]} voltou!\n⏱️ AFK por: ${duration}`,
-         { mentions: [m.sender] }
-      )
+      await m.reply(`👋 @${m.sender.split('@')[0]} voltou!\n⏱️ AFK por: ${duration}`, {
+         mentions: [m.sender]
+      })
    }
 }
